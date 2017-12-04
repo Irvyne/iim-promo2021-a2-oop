@@ -7,4 +7,8 @@ require __DIR__ . '/Article.php';
 
 $article = new Article();
 
-echo $article->getId();
+try {
+    $article->setId(-19);
+} catch (Exception $e) {
+    echo "Error, ".$e->getMessage();
+}
