@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Entity;
+
 class Article
 {
     /**
@@ -17,6 +19,10 @@ class Article
      */
     private $status;
 
+    const STATUS_PUBLISHED   = 0;
+    const STATUS_UNPUBLISHED = 1;
+    const STATUS_DRAFT       = 2;
+
     /**
      * @return int
      */
@@ -29,7 +35,7 @@ class Article
      * @param int $id
      *
      * @return Article
-     * 
+     *
      * @throws Exception
      */
     public function setId(int $id): Article
@@ -58,9 +64,15 @@ class Article
      * @param string $name
      *
      * @return Article
+     *
+     * @throws Exception
      */
     public function setName(string $name): Article
     {
+        if (empty($name)) {
+            throw new Exception("Article name cannot be empty.");
+        }
+
         $this->name = $name;
 
         return $this;
@@ -78,11 +90,26 @@ class Article
      * @param int $status
      *
      * @return Article
+     *
+     * @throws Exception
      */
     public function setStatus(int $status): Article
     {
+        if (!in_array($status, self::getStatuses())) {
+            throw new Exception("Status value not valid");
+        }
+
         $this->status = $status;
 
         return $this;
+    }
+
+    public static function getStatuses()
+    {
+        return [
+            self::STATUS_DRAFT,
+            self::STATUS_UNPUBLISHED,
+            self::STATUS_PUBLISHED,
+        ];
     }
 }

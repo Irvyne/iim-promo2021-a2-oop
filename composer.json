@@ -1,0 +1,12 @@
+{
+    "name": "irvyne/php-oop-lesson",
+    "authors": [
+        {
+            "name": "Thibaud BARDIN",
+            "email": "thibaud.bardin@gmail.com"
+        }
+    ],
+    "require": {
+        "cocur/slugify": "^3.0"
+    }
+}
