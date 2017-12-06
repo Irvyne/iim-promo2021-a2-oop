@@ -23,3 +23,9 @@ php vendor/bin/doctrine
 ```bash
 vendor\bin\doctrine
 ```
+
+## Create Database
+
+```bash
+mysql -uroot -p -e "CREATE DATABASE IF NOT EXISTS iim_promo2021_oop;"
+```
