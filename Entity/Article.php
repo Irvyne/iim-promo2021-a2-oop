@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Cocur\Slugify\Slugify;
+
 class Article
 {
     /**
@@ -18,6 +20,11 @@ class Article
      * @var int
      */
     private $status;
+
+    /**
+     * @var string
+     */
+    private $slug;
 
     const STATUS_PUBLISHED   = 0;
     const STATUS_UNPUBLISHED = 1;
@@ -36,7 +43,7 @@ class Article
      *
      * @return Article
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function setId(int $id): Article
     {
@@ -44,7 +51,7 @@ class Article
         // -> Error
         // -> Exception
         if ($id < 1) {
-            throw new Exception("Invalid value, id must be >= 1");
+            throw new \Exception("Invalid value, id must be >= 1");
         }
 
         $this->id = $id;
@@ -65,15 +72,19 @@ class Article
      *
      * @return Article
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function setName(string $name): Article
     {
         if (empty($name)) {
-            throw new Exception("Article name cannot be empty.");
+            throw new \Exception("Article name cannot be empty.");
         }
 
         $this->name = $name;
+
+        /* START Slug */
+        $this->setSlug($name);
+        /* END Slug */
 
         return $this;
     }
@@ -91,12 +102,12 @@ class Article
      *
      * @return Article
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function setStatus(int $status): Article
     {
         if (!in_array($status, self::getStatuses())) {
-            throw new Exception("Status value not valid");
+            throw new \Exception("Status value not valid");
         }
 
         $this->status = $status;
@@ -112,4 +123,27 @@ class Article
             self::STATUS_PUBLISHED,
         ];
     }
+
+    /**
+     * @return string
+     */
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     *
+     * @return Article
+     */
+    public function setSlug(string $slug)
+    {
+        $slugify = new Slugify();
+        $this->slug = $slugify->slugify($slug);
+
+        return $this;
+    }
+
+
 }

@@ -3,14 +3,16 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-require __DIR__ . '/Article.php';
+require __DIR__ . '/vendor/autoload.php';
 
-$article = new Article();
+$article = new App\Entity\Article();
 
 try {
     $article->setId(19);
-    $article->setName("Blabla");
-    $article->setStatus(Article::STATUS_UNPUBLISHED);
+    $article->setName("Mon Belézef \$zdf zfz");
+    $article->setStatus(\App\Entity\Article::STATUS_UNPUBLISHED);
+
+    dump($article);
 } catch (Exception $e) {
     echo "Error, ".$e->getMessage();
 }
