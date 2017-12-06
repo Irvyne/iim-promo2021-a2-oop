@@ -1,14 +1,14 @@
 # OOP
 
+## Configure Project
+
+Copy file `parameters.php.dist` to `parameters.php` and change value accordingly to your environment.
+
 ## Install dependencies
 
 ```bash
 composer install
 ```
-
-## Configure Project
-
-Copy file `parameters.php.dist` to `parameters.php` and change value accordingly to your environment.
 
 ## Use Doctrine
 
