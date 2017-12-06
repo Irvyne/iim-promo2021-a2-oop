@@ -3,26 +3,41 @@
 namespace App\Entity;
 
 use Cocur\Slugify\Slugify;
+use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Entity()
+ * @ORM\Table(name="article")
+ */
 class Article
 {
     /**
      * @var int
+     *
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string")
      */
     private $name;
 
     /**
      * @var int
+     *
+     * @ORM\Column(type="smallint")
      */
     private $status;
 
     /**
      * @var string
+     *
+     * @ORM\Column(type="string")
      */
     private $slug;
 
