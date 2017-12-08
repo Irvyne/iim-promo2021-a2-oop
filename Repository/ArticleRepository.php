@@ -14,4 +14,12 @@ class ArticleRepository extends EntityRepository
 
         return $queryBuilder->getQuery()->execute();
     }
+
+    public function count()
+    {
+        $queryBuilder = $this->createQueryBuilder('a');
+        $queryBuilder->select('COUNT(a.id)');
+
+        return (int) $queryBuilder->getQuery()->getSingleScalarResult();
+    }
 }
