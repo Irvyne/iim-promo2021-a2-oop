@@ -16,7 +16,7 @@ $articleRepository = $entityManager->getRepository(Article::class);
 $article = $articleRepository->find(1);
 
 // Get all Article
-$articles = $articleRepository->loadAll(500, 0);
+$articles = $articleRepository->loadAll(500, 1000);
 
 // Get one Article with filter or null if no filter match
 $articleBy = $articleRepository->findOneBy([
@@ -28,7 +28,18 @@ $articlesBy = $articleRepository->findBy([
     'status' => Article::STATUS_PUBLISHED,
 ]);
 
-dump($article);
+/*dump($article);
 dump($articles);
 dump($articleBy);
-dump($articlesBy);
+dump($articlesBy);*/
+
+$array = ['Apple', 'Pie'];
+
+function add(array &$array)
+{
+    $array[] = 'Plop';
+}
+
+add($array);
+
+dump($array);
