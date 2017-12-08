@@ -17,9 +17,11 @@ $articles = $repo->loadAll(10, ($page - 1) * 10);
 
 $count = $repo->count();
 
-dump($count);
+$maxPage = (int)ceil($count / 10);
 
 echo $twig->render('articles.html.twig', [
-    'title'    => 'Articles',
-    'articles' => $articles,
+    'title'       => 'Articles',
+    'articles'    => $articles,
+    'currentPage' => $page,
+    'maxPage'     => $maxPage,
 ]);
