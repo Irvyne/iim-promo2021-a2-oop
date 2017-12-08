@@ -7,19 +7,28 @@ require __DIR__ . '/bootstrap.php';
 
 use App\Entity\Article;
 
-$faker = Faker\Factory::create();
+// Save ->persist($object) puis ->flush()
 
-for ($i = 0; $i < 100000; $i++) {
-    $article = new Article();
-    $article->setName($faker->name);
-    $article->setStatus(Article::STATUS_UNPUBLISHED);
+/** @var \App\Repository\ArticleRepository $articleRepository */
+$articleRepository = $entityManager->getRepository(Article::class);
 
-    $entityManager->persist($article);
+// Get One Article or null if id doesn't exist
+$article = $articleRepository->find(1);
 
-    // Save all data each 500 articles to avoid memory leaks.
-    if (0 === $i % 500) {
-        $entityManager->flush();
-    }
-}
+// Get all Article
+$articles = $articleRepository->loadAll(500, 0);
 
-$entityManager->flush();
+// Get one Article with filter or null if no filter match
+$articleBy = $articleRepository->findOneBy([
+    'status' => Article::STATUS_PUBLISHED,
+]);
+
+// Get one Article with filter or null if no filter match
+$articlesBy = $articleRepository->findBy([
+    'status' => Article::STATUS_PUBLISHED,
+]);
+
+dump($article);
+dump($articles);
+dump($articleBy);
+dump($articlesBy);
