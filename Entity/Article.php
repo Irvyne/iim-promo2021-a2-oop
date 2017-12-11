@@ -44,6 +44,7 @@ class Article
     const STATUS_PUBLISHED   = 0;
     const STATUS_UNPUBLISHED = 1;
     const STATUS_DRAFT       = 2;
+    const MAX_PER_PAGE       = 50;
 
     /**
      * @return int

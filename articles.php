@@ -11,13 +11,10 @@ use App\Entity\Article;
 $page = $_GET['page'] ?? 1;
 
 /** @var \App\Repository\ArticleRepository $repo */
-$repo = $entityManager->getRepository(Article::class);
-
-$articles = $repo->loadAll(10, ($page - 1) * 10);
-
-$count = $repo->count();
-
-$maxPage = (int)ceil($count / 10);
+$repo     = $entityManager->getRepository(Article::class);
+$articles = $repo->loadAll(Article::MAX_PER_PAGE, ($page - 1) * Article::MAX_PER_PAGE);
+$count    = $repo->count();
+$maxPage  = (int)ceil($count / Article::MAX_PER_PAGE);
 
 echo $twig->render('articles.html.twig', [
     'title'       => 'Articles',
